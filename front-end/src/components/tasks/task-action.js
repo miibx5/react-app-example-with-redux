@@ -9,6 +9,7 @@ export const changeDescription = event => ({
 
 export const search = () => {
     const request = axios.get(`${URL}?sort=-dateCreation`);
+    console.log("request na action", request);
     return {
         type: METHODS.TASK_SEARCH,
         payload: request

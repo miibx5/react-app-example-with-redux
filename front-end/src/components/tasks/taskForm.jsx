@@ -11,7 +11,7 @@ class TaskForm extends Component {
         this.keyHandler = this.keyHandler.bind(this);
     }
 
-    componentWillUnmount() {
+    componentWillMount() {
         this.props.search();
     }
 
@@ -19,7 +19,7 @@ class TaskForm extends Component {
         if (e.key === "Enter") {
             e.shiftKey ? this.props.handleSearch() : this.props.handleAdd()
         } else if (e.key === "Escape") {
-            this.props.handleClear();
+            props.handleClear();
         }
     }
     render() {
