@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import Grid from "../template/grid";
 import IconButton from "../template/iconButton";
+import { changeDescription } from "./task-action";
 
 const TaskForm = props => {
 
@@ -18,7 +20,7 @@ const TaskForm = props => {
             <Grid cols="10 9 10">
                 <input id="description"
                     value={props.description}
-                    onChange={props.handleChange}
+                    onChange={props.changeDescription}
                     onKeyUp={keyHandler}
                     className="form-control" placeholder="Adcione uma tarefa" />
             </Grid>
@@ -33,5 +35,7 @@ const TaskForm = props => {
 }
 
 const mapStateToProps = state => ({ description: state.task.description });
-export default connect(mapStateToProps)(TaskForm);
+const mapDispacthToProps = dispacth =>
+    bindActionCreators({ changeDescription }, dispacth);
+export default connect(mapStateToProps, mapDispacthToProps)(TaskForm);
 
