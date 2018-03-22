@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Grid from "../template/grid";
 import IconButton from "../template/iconButton";
-import { changeDescription, search } from "./task-action";
+import { changeDescription, search, add } from "./task-action";
 
 class TaskForm extends Component {
     constructor(props) {
@@ -16,13 +16,15 @@ class TaskForm extends Component {
     }
 
     keyHandler(e) {
+        const { add, search, description } = this.props;
         if (e.key === "Enter") {
-            e.shiftKey ? this.props.handleSearch() : this.props.handleAdd()
+            e.shiftKey ? search() : add(description);
         } else if (e.key === "Escape") {
             props.handleClear();
         }
     }
     render() {
+        const { add, search, description } = this.props;
         return (
             <div>
                 <Grid cols="10 9 10">
@@ -33,8 +35,8 @@ class TaskForm extends Component {
                         className="form-control" placeholder="Adcione uma tarefa" />
                 </Grid>
                 <Grid cols="12 3 2">
-                    <IconButton style="primary" onClick={this.props.handleAdd} icon="plus" />
-                    <IconButton style="info" onClick={this.props.handleSearch} icon="search" />
+                    <IconButton style="primary" onClick={() => add(description)} icon="plus" />
+                    <IconButton style="info" onClick={() => search()} icon="search" />
                     <IconButton style="default" onClick={this.props.handleClear} icon="close" />
 
                 </Grid>
@@ -75,6 +77,6 @@ class TaskForm extends Component {
 
 const mapStateToProps = state => ({ description: state.task.description });
 const mapDispacthToProps = dispacth =>
-    bindActionCreators({ changeDescription, search }, dispacth);
+    bindActionCreators({ changeDescription, search, add }, dispacth);
 export default connect(mapStateToProps, mapDispacthToProps)(TaskForm);
 

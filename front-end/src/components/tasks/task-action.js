@@ -15,3 +15,11 @@ export const search = () => {
         payload: request
     }
 }
+export const add = (description) => {
+    const request = axios.post(URL, { description });
+    console.log("request na action", request);
+    return {
+        type: METHODS.TASK_ADD,
+        payload: request
+    }
+}

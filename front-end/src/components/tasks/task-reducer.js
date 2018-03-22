@@ -7,6 +7,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, description: action.payload }
         case METHODS.TASK_SEARCH:
             return { ...state, list: action.payload.data }
+        case METHODS.TASK_ADD:
+            return { ...state, description: "" }
         default:
             return state
     }
