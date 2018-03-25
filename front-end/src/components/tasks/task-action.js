@@ -18,8 +18,8 @@ export const search = () => {
 export const add = (description) => {
     const request = axios.post(URL, { description });
     console.log("request na action", request);
-    return {
+    return [{
         type: METHODS.TASK_ADD,
         payload: request
-    }
+    }, search()]
 }
