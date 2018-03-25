@@ -1,17 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import IconButton from "../template/iconButton";
+import { markAsDone, markAsPending } from "../tasks/task-action"
+
 
 const TaskList = props => {
-
+    console.log(props)
     const renderRows = () => {
         const list = props.list || [];
         return list.map(task => (
             <tr key={task._id}>
                 <td className={task.done ? "markedAsDone" : ""}>{task.description}</td>
                 <td>
-                    <IconButton style="success" icon="check" onClick={() => props.handleMarkAsDone(task)} hide={task.done} />
-                    <IconButton style="warning" icon="undo" onClick={() => props.handleMarkAsPending(task)} hide={!task.done} />
+                    <IconButton style="success" icon="check" onClick={() => props.markAsDone(task)} hide={task.done} />
+                    <IconButton style="warning" icon="undo" onClick={() => props.markAsPending(task)} hide={!task.done} />
                     <IconButton style="danger" icon="trash-o" onClick={() => props.handleRemove(task)} hide={!task.done} />
                 </td>
             </tr>
@@ -35,4 +38,6 @@ const TaskList = props => {
     )
 };
 const mapStateToProps = state => ({ list: state.task.list });
-export default connect(mapStateToProps)(TaskList);
+const mapDispacthToProps = dispacth =>
+    bindActionCreators({ markAsDone, markAsPending }, dispacth);
+export default connect(mapStateToProps, mapDispacthToProps)(TaskList);
