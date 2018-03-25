@@ -15,11 +15,15 @@ export const search = () => {
         payload: request
     }
 }
+
 export const add = (description) => {
-    const request = axios.post(URL, { description });
-    console.log("request na action", request);
-    return [{
-        type: METHODS.TASK_ADD,
-        payload: request
-    }, search()]
+    return dispacth => {
+        axios.post(URL, { description })
+            .then(resp => dispacth({
+                type: METHODS.TASK_ADD,
+                payload: resp.data
+            })).then(resp => dispacth(search()))
+
+    }
+
 }
