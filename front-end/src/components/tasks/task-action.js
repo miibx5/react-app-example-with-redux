@@ -19,10 +19,8 @@ export const search = () => {
 export const add = (description) => {
     return dispacth => {
         axios.post(URL, { description })
-            .then(resp => dispacth({
-                type: METHODS.TASK_ADD,
-                payload: resp.data
-            })).then(resp => dispacth(search()))
+            .then(resp => dispacth(clear()))
+            .then(resp => dispacth(search()))
 
     }
 }
@@ -40,5 +38,17 @@ export const markAsPending = (task) => {
         axios.put(`${URL}/${task._id}`, { ...task, done: false })
             .then(resp => dispacth(search()));
 
+    }
+}
+
+export const remove = (task) => {
+    return dispacth => {
+        axios.delete(`${URL}/${task._id}`).then(resp => dispacth(search()));
+
+    }
+}
+export const clear = () => {
+    return {
+        type: METHODS.TASK_CLEAR
     }
 }

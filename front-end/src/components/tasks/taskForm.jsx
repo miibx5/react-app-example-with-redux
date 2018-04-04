@@ -5,7 +5,7 @@ import Grid from "../template/grid";
 import IconButton from "../template/iconButton";
 import {
     changeDescription, search,
-    add
+    add, clear
 } from "./task-action";
 
 class TaskForm extends Component {
@@ -19,11 +19,11 @@ class TaskForm extends Component {
     }
 
     keyHandler(e) {
-        const { add, search, description } = this.props;
+        const { add, search, clear, description } = this.props;
         if (e.key === "Enter") {
             e.shiftKey ? search() : add(description);
         } else if (e.key === "Escape") {
-            props.handleClear();
+            clear();
         }
     }
     render() {
@@ -40,7 +40,7 @@ class TaskForm extends Component {
                 <Grid cols="12 3 2">
                     <IconButton style="primary" onClick={() => add(description)} icon="plus" />
                     <IconButton style="info" onClick={() => search()} icon="search" />
-                    <IconButton style="default" onClick={this.props.handleClear} icon="close" />
+                    <IconButton style="default" onClick={this.props.clear} icon="close" />
 
                 </Grid>
             </div>
@@ -51,6 +51,6 @@ class TaskForm extends Component {
 
 const mapStateToProps = state => ({ description: state.task.description });
 const mapDispacthToProps = dispacth =>
-    bindActionCreators({ changeDescription, search, add }, dispacth);
+    bindActionCreators({ changeDescription, search, add, clear }, dispacth);
 export default connect(mapStateToProps, mapDispacthToProps)(TaskForm);
 

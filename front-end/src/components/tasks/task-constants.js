@@ -4,7 +4,9 @@ export const METHODS = {
     TASK_ADD: "TASK_ADDED",
     MARK_AS_DONE: "MARK_AS_DONE",
     MARK_AS_PENDING: "MARK_AS_PENDING",
-    DELETE: "DELETE"
+    DELETE: "DELETE",
+    TASK_CLEAR: "CLEAR"
+
 }
 
 export const URL = "http://127.0.0.1:2002/api/todos";
