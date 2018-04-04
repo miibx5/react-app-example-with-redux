@@ -9,7 +9,7 @@ import {
 
 
 const TaskList = props => {
-    console.log(props)
+
     const renderRows = () => {
         const list = props.list || [];
         return list.map(task => (

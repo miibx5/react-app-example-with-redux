@@ -38,8 +38,8 @@ class TaskForm extends Component {
                         className="form-control" placeholder="Adcione uma tarefa" />
                 </Grid>
                 <Grid cols="12 3 2">
-                    <IconButton style="primary" onClick={() => add(description)} icon="plus" />
-                    <IconButton style="info" onClick={() => search()} icon="search" />
+                    <IconButton style="primary" onClick={() => add()} icon="plus" />
+                    <IconButton style="info" onClick={search} icon="search" />
                     <IconButton style="default" onClick={this.props.clear} icon="close" />
 
                 </Grid>

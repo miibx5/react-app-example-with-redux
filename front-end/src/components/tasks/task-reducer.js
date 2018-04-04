@@ -6,7 +6,7 @@ export default (state = INITIAL_STATE, action) => {
         case METHODS.DESCRIPTION_CHANGED:
             return { ...state, description: action.payload }
         case METHODS.TASK_SEARCH:
-            return { ...state, list: action.payload.data }
+            return { ...state, list: action.payload }
         case METHODS.TASK_CLEAR:
             return { ...state, description: "" }
         default:

@@ -8,11 +8,14 @@ export const changeDescription = event => ({
 });
 
 export const search = () => {
-    const request = axios.get(`${URL}?sort=-dateCreation`);
-    console.log("request na action", request);
-    return {
-        type: METHODS.TASK_SEARCH,
-        payload: request
+    return (dispacth, getState) => {
+        const description = getState().task.description;
+        const search = description ? `&description__regex=/${description}/` : "";
+        const request = axios.get(`${URL}?sort=-dateCreation${search}`)
+            .then(resp => dispacth({
+                type: METHODS.TASK_SEARCH,
+                payload: resp.data
+            }))
     }
 }
 
@@ -48,7 +51,7 @@ export const remove = (task) => {
     }
 }
 export const clear = () => {
-    return {
+    return [{
         type: METHODS.TASK_CLEAR
-    }
+    }, search()]
 }
